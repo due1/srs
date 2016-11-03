@@ -20,7 +20,7 @@ public interface RoomController {
 
 	/**
 	 * Given a date range starting at t1 and ending at t2, i.e., dr(t1,t2), lists all available
-	 * rooms having no booking with a dr(x,y) where t1 &le x &le t2 or t1 &le y &le t2 or (x &lt t1 and y &gt t2).
+	 * rooms having no booking with a dr(x,y) where t1 &le; x &le; t2 or t1 &le; y &le; t2 or (x &lt; t1 and y &gt; t2).
 	 *
 	 * @param dateRange a date range dr(t1,t2)
 	 * @return a (possibly empty) set of rooms
