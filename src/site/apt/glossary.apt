@@ -1,0 +1,47 @@
+    ----------
+    Glossary
+	----------
+    ----------
+    October 21, 2016
+
+Glossary for the Smart Reservation System
+
+	This is the Glossary for the project Smart Reservation System. Here, the
+most important terms are captured and briefly described. It is maintained
+by the development team.
+	
+	
+	[Product owner]		The product owner has all rights about the project.
+
+	[SRS]			    Smart Reservation System - A software system enabling
+					    associations and enterprises to book and share rooms.
+	
+	[Stakeholders]		The people that are related to the product.
+
+	[Scrum-Master]      The "coach" of the development team.
+
+	[Use Case Diagram]  Representation of interactions between the user and the system.
+
+	[User Stories]      Description of interactions between the end user and the system.
+
+	[Domain Model]      Shows the (most) important concepts of a software system.
+
+
+* Stakeholders
+
+*------+--------+---------------+------------+----------+
+|<<No>>|<<Name>>|<<Description>>|<<Interest>>|<<Party>>|
+*------+--------+---------------+------------+----------+
+|01|Customer|Person/Organization that provided the assignment.|Complete, bug-free und feature-rich product.|Prof. Dr. Eric Dubuis|
+*--+---------------+-----------------------+------------------------+------------------------+
+|02|Scrum-Master|Head of the project team.|Trouble-free coordination of the production process and good teamwork.|Valentin Widmer|
+*--+---------------+-----------------------+------------------------+------------------------+
+|03|Developer|People that are mainly working on the project.|Fair distribution of tasks, reasonable contract conditions (time limits).|Davide Papacella, Jonas Nydegger, Xavier Frei|
+*--+---------------+-----------------------+------------------------+------------------------+
+|04|User|People that will use the finished product.|Stable, user-friendly and feature-rich product.|...|
+*--+---------------+-----------------------+------------------------+------------------------+
+|05|Private Investors|Supporters of the project.|Invested money including profit.|...|
+*--+---------------+-----------------------+------------------------+------------------------+
+
+	
+

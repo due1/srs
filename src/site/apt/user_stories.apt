@@ -1,0 +1,56 @@
+    ----------
+    User Stories
+    ----------
+    Eric Dubuis
+    ----------
+    November 2, 2016
+
+User Stories
+
+  This document describes the (initial) set of user stories as well as the
+roles users have when using the Smart Reservation System (SRS).
+
+
+* 1. Roles
+
+  [Person] An ordinary user of the system.
+
+  [Administrator] Person who enters and manages the rooms that can be booked.
+
+  [System Administrator] Person who manages the security and accounts if need be.
+
+
+
+* 2. User Stories
+
+  Describe the user stories you have identified so far. Provide a table,
+and number the stories. Provide a short text for each user story by using
+the format as presented in the script. In the last column, provide one
+or more criteria which can be used to validate whether the user story is
+correctly implemented.
+
+
+*------+---------------+-----------+----------+
+|<<No>>|<<Description>>|<<Success>>|<<Failed>>|
+*------+---------------+-----------+----------+
+|01|As person I want to book one or multiple reservations for different rooms, to occupy them for a certain period.|...|...|
+*--+---------------------------------------------------------+-----------+-----------+
+|02|As person I want to cancel reservations placed by me, to set them free for that period of time.|...|...|
+*--+---------------------------------------------------------+-----------+-----------+
+|03|As person I want to see which rooms are open at which times, to see which rooms are open for reservation.|...|...|
+*--+---------------------------------------------------------+-----------+-----------+
+|04|As person I want to receive notifications concerning my reservation, to be up-to-date about status changes. |...|...|
+*--+---------------------------------------------------------+-----------+-----------+
+|05|As person I want to have a list of my reservations, to keep an overview.|...|...|
+*--+---------------------------------------------------------+-----------+-----------+
+|06|As administrator I want to add, modify and remove rooms, to adjust the system according to the circumstances.|...|...|
+*--+---------------------------------------------------------+-----------+-----------+
+|07|As administrator I want to cancel or update reservations in case a room may not be available on short notice.|...|...|
+*--+---------------------------------------------------------+-----------+-----------+
+|08|As system administrator I want to ...|...|...|
+*--+---------------------------------------------------------+-----------+-----------+
+
+
+* 3. Open Issues
+
+	None so far.

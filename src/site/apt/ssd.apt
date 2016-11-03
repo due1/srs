@@ -1,0 +1,46 @@
+    ----------
+    System Sequence Diagrams
+    ----------
+    Eric Dubuis
+    ----------
+    November 2, 2016
+
+
+System Sequence Diagrams
+
+	This document describes the (initial) set of the System Sequence Diagragms
+as introduced be {{{http://www.craiglarman.com/}Craig Larman}} the Smart
+Reservation System (SRS).
+
+
+* 1. User Story "Person Books a Room"
+
+	A person <<<p>>> books a room. It is assumed that the person has made a login into the
+system prior to execute this user story. The following system sequence diagram
+illustrates the sequence of <system operations>.
+
+[images/ssd.svg] System sequence diagram for the "Person Books a Room" user story.
+
+	Person <<<p>>> first looks up <all> rooms (in order to get an overview of all
+existing rooms) or looks up <available> rooms (in order to know which rooms are
+available).
+
+	After then, person <<<p>>> performs a booking which implies the provisioning
+of the following parameters:
+
+	*	<<<p>>>:	Who is performing the booking (can be implicit).
+
+	*	<<<room>>>:	Which room is going to be booked.
+
+	*	<<<dateTime>>>:	Date and time to book the room.
+
+	[]
+
+	The user story is terminated by a confirmation (happy path). Alternatively,
+the user story can be aborted by a corresponding error message, for example,
+if the room is no longer available (not shown in the diagram).
+
+
+* 2. Open Issues
+
+	SSD's for other user stories should be provided, too.

@@ -1,0 +1,54 @@
+    ----------
+    Domain Model
+    ----------
+    Eric Dubuis
+    ----------
+    November 2, 2016
+
+Domain Model
+
+  This document describes the domain model ("Fachmodell") of the Smart Reservation
+System (SRS). It introduces the most important entities ("Fachklassen") and the
+associations among them. It also introduces the respective multiplicities.
+
+  Note that only a few attributes are shown in the diagram, but no operations.
+
+
+* 1. Domain Model
+
+[images/domain_model.svg] Domain Model
+
+** 1.1 Concept Classes
+
+	Concept class <<<Person>>> models any user being able or allowed to book a room. Concept
+class <<<Room>>> denotes a room (or any other resource) that can be booked. The information
+about a particular booking is captured by concept class <<<Reservation>>>.
+
+** 1.2 Associations
+
+	Association <<<makes>>> denotes the fact that one Person can book a room; the
+booking itself is expressed by an instance of a <<<Reservation>>>. A person can
+book many rooms, hence the <<<0..\*>>> multiplicity at the <<<Reservation>>> side of
+the association. On the other hand, a <<<Reservation>>> instance is associated with
+<one> person only; hence the <<<1>>> multiplicity at the <<<Person>>> side of the
+association.
+
+	Association <<<isBookedBy>>> denotes that a room may be booked by zero or more
+reservations, hence the <<<0..\*>>> multiplicity. The condition here is that none of
+the reservation's <<<dateRange>>> date-range may overlap, i.e., they are all disjunct.
+On the other hand, each <<<Reservation>>> instance is associated with <one> room;
+hence the <<<1>>> multiplicity at the <<<Room>>> side of the association.
+
+	[Note:]	The <<<1>>> multiplicity at the <<<Room>>> side of the <<<isBookedBy>>>
+			association implies that <one> room can be book at a time by one
+			person. A person cannot book <many> rooms with one booking.
+
+	Association <<<involves>>> is an optional feature. It allows the SRS system
+to inform all persons involved in a reservation to send an email for an update
+or cancellation of the reservation. Note that the association's navigability is
+unidirectional.
+
+
+* 2. Open Issues
+
+  None so far.
