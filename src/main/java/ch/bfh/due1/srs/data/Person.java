@@ -5,18 +5,21 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-package ch.bfh.ti.due1.srs.domain.concept;
+package ch.bfh.due1.srs.data;
 
-import java.util.Set;
+import java.util.List;
 
 public interface Person {
 
+	public Long getId();
+
 	public String getName();
+
 	public String getEmail();
-	public Set<Reservation> getReservations();
 
-	public void addReservation(Reservation reservation);
-	public void removeReservation(Reservation reservation);
+	public List<Reservation> getReservations();
 
-	// TODO Update?
+	public void addReservation(Reservation r);
+
+	public void removeReservation(Reservation r);
 }

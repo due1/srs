@@ -5,16 +5,15 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-package ch.bfh.ti.due1.srs.domain.concept;
-
-import java.util.Set;
+package ch.bfh.due1.srs.data;
 
 import ch.bfh.ti.daterange.DateRange;
 
 public interface Reservation {
 
 	public Person getOwner();
-	public Set<Person> getInvolved();
+
+	// public List<Person> getInvolved();
+
 	public DateRange getDateRange();
-	public Room getRoom();
 }
