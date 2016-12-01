@@ -7,7 +7,7 @@
  */
 package ch.bfh.due1.srs.data;
 
-import ch.bfh.ti.daterange.DateRange;
+import ch.bfh.due1.time.TimeSlot;
 
 public interface Reservation {
 
@@ -15,5 +15,5 @@ public interface Reservation {
 
 	// public List<Person> getInvolved();
 
-	public DateRange getDateRange();
+	public TimeSlot getTimeSlot();
 }

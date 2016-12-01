@@ -137,9 +137,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>ch.bfh.ti.due1</groupId>
-			<artifactId>date-range</artifactId>
-			<version>1.1</version>
+			<groupId>ch.bfh.due1</groupId>
+			<artifactId>time-slot</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 

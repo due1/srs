@@ -27,36 +27,36 @@ public class RoomControllerTest {
 
 	@Test
 	public void testAddRoom() {
-		String name = "Abbey Road Studios Room Beatles";
-		int capacity = 10;
-		this.roomController.addRoom(name, capacity);
+		String n = "Abbey Road Studios Room Beatles";
+		int c = 10;
+		Room r = this.roomController.addRoom(n, c);
 		List<Room> rooms = this.roomController.listRooms();
 		assertNotNull(rooms);
-		assertTrue(rooms.size() >= 0);
-		// TODO: Check if new room is in list of rooms ==> Change of interface
-		// RoomController necessary!
+		assertTrue(rooms.size() >= 1);
+		assertTrue(rooms.contains(r));
 	}
 
-	// @Test
-	// public void testListRooms() {
-	// EntityFactory ef = new EntityFactory();
-	// ControllerFactory cf = new ControllerFactory();
-	// RoomController rc = cf.getRoomController();
-	// Room r1 = ef.createRoom("R1", 10);
-	// Room r2 = ef.createRoom("R2", 20);
-	// rc.addRoom(r1);
-	// rc.addRoom(r2);
-	// assertEquals(2, rc.listRooms().size());
-	// assertTrue(rc.listRooms().contains(r1));
-	// assertTrue(rc.listRooms().contains(r2));
-	// }
-	//
+	@Test
+	public void testListRooms() {
+		String n1 = "Beverly Hills Suite";
+		int c1 = 4;
+		Room r1 = this.roomController.addRoom(n1, c1);
+		String n2 = "Beverly Hill Standard";
+		int c2 = 2;
+		Room r2 = this.roomController.addRoom(n2, c2);
+		List<Room> rooms = this.roomController.listRooms();
+		assertNotNull(rooms);
+		assertTrue(rooms.size() >= 2);
+		assertTrue(rooms.contains(r1));
+		assertTrue(rooms.contains(r2));
+	}
+
 	// @Test
 	// public void testLookupAvailableRooms() throws
 	// ReservationControllerException {
 	// EntityFactory ef = new EntityFactory();
 	// ControllerFactory cf = new ControllerFactory();
-	// RoomController rc = cf.getRoomController();
+	// ReservationController rc = cf.getRoomController();
 	// Room r1 = ef.createRoom("R1", 10);
 	// Room r2 = ef.createRoom("R2", 20);
 	// Room r3 = ef.createRoom("R3", 20);
@@ -67,11 +67,11 @@ public class RoomControllerTest {
 	// Person p = ef.createPerson("Harry Potter", "hp@nodomain.org");
 	// DateRangeFactory drf = new
 	// ch.bfh.ti.daterange.impl.pojo.DateRangeFactory();
-	// DateRange dateRange = drf.createDateRange(DateFactory.now(),
-	// DateFactory.getTomorrow());
+	// DateRange dateRange = drf.createDateRange(DateTimeFactory.now(),
+	// DateTimeFactory.getTomorrow());
 	// resC.bookRoom(p, r1, dateRange);
-	// DateRange all = drf.createDateRange(DateFactory.EPOCH,
-	// DateFactory.INFINITY);
+	// DateRange all = drf.createDateRange(DateTimeFactory.EPOCH,
+	// DateTimeFactory.INFINITY);
 	// assertEquals(2, rc.listAvailableRooms(all).size());
 	// }
 	//
@@ -80,7 +80,7 @@ public class RoomControllerTest {
 	// {
 	// EntityFactory ef = new EntityFactory();
 	// ControllerFactory cf = new ControllerFactory();
-	// RoomController rc = cf.getRoomController();
+	// ReservationController rc = cf.getRoomController();
 	// Room r1 = ef.createRoom("R1", 10);
 	// Room r2 = ef.createRoom("R2", 20);
 	// Room r3 = ef.createRoom("R3", 20);
@@ -91,11 +91,11 @@ public class RoomControllerTest {
 	// Person p = ef.createPerson("Harry Potter", "hp@nodomain.org");
 	// DateRangeFactory drf = new
 	// ch.bfh.ti.daterange.impl.pojo.DateRangeFactory();
-	// DateRange dateRange = drf.createDateRange(DateFactory.now(),
-	// DateFactory.getTomorrow());
+	// DateRange dateRange = drf.createDateRange(DateTimeFactory.now(),
+	// DateTimeFactory.getTomorrow());
 	// resC.bookRoom(p, r1, dateRange);
-	// DateRange all = drf.createDateRange(DateFactory.EPOCH,
-	// DateFactory.INFINITY);
+	// DateRange all = drf.createDateRange(DateTimeFactory.EPOCH,
+	// DateTimeFactory.INFINITY);
 	// assertEquals(1, rc.listBookedRooms(all).size());
 	// }
 }

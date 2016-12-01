@@ -17,7 +17,8 @@ import ch.bfh.due1.srs.data.DataAccess;
 import ch.bfh.due1.srs.data.Person;
 import ch.bfh.due1.srs.data.Reservation;
 import ch.bfh.due1.srs.data.Room;
-import ch.bfh.ti.daterange.DateRange;
+import ch.bfh.due1.time.TimeSlot;
+import ch.bfh.due1.time.TimeSlotFactory;
 
 public class JPADataAccess extends DataAccess {
 	public static final String PERSISTENCE_UNIT = "srs-pu";
@@ -77,7 +78,7 @@ public class JPADataAccess extends DataAccess {
 	}
 
 	@Override
-	public Reservation makeReservation(Person person, Room room, DateRange dateRange) {
+	public Reservation makeReservation(Person person, Room room, TimeSlot dateRange) {
 		this.entityManager.getTransaction().begin();
 		ReservationEntity reservation = new ReservationEntity(person, room, dateRange);
 		this.entityManager.persist(reservation);
@@ -87,5 +88,25 @@ public class JPADataAccess extends DataAccess {
 		this.entityManager.merge(room);
 		this.entityManager.getTransaction().commit();
 		return reservation;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reservation> findAllReservationsByRoom(Room room) {
+		Query query = this.entityManager.createQuery("select res from Reservation res where res.room = :r");
+		query.setParameter("r", room);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reservation> findAllReservations() {
+		Query query = this.entityManager.createQuery("select res from Reservation res");
+		return query.getResultList();
+	}
+
+	@Override
+	public TimeSlotFactory getTimeSlotFactory() {
+		return new JPATimeSlotFactory();
 	}
 }
