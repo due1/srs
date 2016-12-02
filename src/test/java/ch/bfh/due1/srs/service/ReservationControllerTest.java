@@ -40,7 +40,7 @@ public class ReservationControllerTest {
 		Room aRoom = dataAccess.makeRoom("N215", 12);
 		LocalDateTime startTime1 = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
 		LocalDateTime endTime1 = startTime1.plusHours(1);
-		TimeSlotFactory tsf = dataAccess.getTimeSlotFactory();
+		TimeSlotFactory tsf = this.reservationController.getTimeSlotFactory();
 		TimeSlot timeslot1 = tsf.createTimeSlot(startTime1, endTime1);
 		this.reservationController.makeReservation(aPerson, aRoom, timeslot1);
 		LocalDateTime startTime2 = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).plusHours(2);
@@ -80,7 +80,7 @@ public class ReservationControllerTest {
 		Room aRoom = dataAccess.makeRoom("N311", 18);
 		LocalDateTime startTime1 = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).plusHours(4);
 		LocalDateTime endTime1 = startTime1.plusHours(1);
-		TimeSlotFactory tsf = dataAccess.getTimeSlotFactory();
+		TimeSlotFactory tsf = this.reservationController.getTimeSlotFactory();
 		TimeSlot timeslot1 = tsf.createTimeSlot(startTime1, endTime1);
 		this.reservationController.makeReservation(aPerson, aRoom, timeslot1);
 		LocalDateTime startTime2 = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).plusHours(7);
@@ -127,7 +127,7 @@ public class ReservationControllerTest {
 		Room aRoom = dataAccess.makeRoom("N2421", 30);
 		LocalDateTime startTime1 = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
 		LocalDateTime endTime1 = startTime1.plusHours(1);
-		TimeSlotFactory tsf = dataAccess.getTimeSlotFactory();
+		TimeSlotFactory tsf = this.reservationController.getTimeSlotFactory();
 		TimeSlot timeslot1 = tsf.createTimeSlot(startTime1, endTime1);
 		Reservation res1 = this.reservationController.makeReservation(aPerson, aRoom, timeslot1);
 		assertNotNull(res1);

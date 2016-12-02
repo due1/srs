@@ -27,9 +27,11 @@ public class DataGenerator {
 		dataAccess.makePerson("Meyer, Franz", "myf1@nodomain.org");
 		dataAccess.makePerson("", "");
 		// make a few rooms
-		Room n215 = dataAccess.makeRoom("N215", 12);
-		dataAccess.makeRoom("N515", 10);
-		dataAccess.makeRoom("N615", 20);
+		Room n215 = dataAccess.makeRoom("N215", 10);
+		dataAccess.makeRoom("N311", 18);
+		dataAccess.makeRoom("N319", 18);
+		dataAccess.makeRoom("N321", 30);
+		dataAccess.makeRoom("N521", 28);
 		// make a few reservations
 		TimeSlotFactory tsf = new JPATimeSlotFactory();
 		LocalDateTime startTime = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);

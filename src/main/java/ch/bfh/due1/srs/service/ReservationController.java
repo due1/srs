@@ -15,6 +15,7 @@ import ch.bfh.due1.srs.data.Person;
 import ch.bfh.due1.srs.data.Reservation;
 import ch.bfh.due1.srs.data.Room;
 import ch.bfh.due1.time.TimeSlot;
+import ch.bfh.due1.time.TimeSlotFactory;
 
 public class ReservationController {
 	private DataAccess dataAccess;
@@ -85,7 +86,13 @@ public class ReservationController {
 		return reservationsByPeriod;
 	}
 
+	public TimeSlotFactory getTimeSlotFactory() {
+		DataAccess dataAccess = DataAccess.getInstance();
+		return dataAccess.getTimeSlotFactory();
+	}
+
 	private boolean available(Room room, TimeSlot timeSlot) {
+		// TODO Implement...
 		List<Reservation> reservationsByPeriod = new ArrayList<>();
 		return reservationsByPeriod.size() == 0;
 	}

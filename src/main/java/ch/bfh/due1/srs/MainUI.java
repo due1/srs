@@ -16,6 +16,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
 import ch.bfh.due1.srs.service.DataGenerator;
+import ch.bfh.due1.srs.service.ReservationController;
 import ch.bfh.due1.srs.service.RoomController;
 import ch.bfh.due1.srs.views.ReservationView;
 import ch.bfh.due1.srs.views.RoomListView;
@@ -26,6 +27,7 @@ public class MainUI extends UI {
 	public static final String MAINVIEW = "Main";
 
 	private RoomController roomController = new RoomController();
+	private ReservationController reservationController = new ReservationController();
 
 	static {
 		DataGenerator.create();
@@ -37,7 +39,8 @@ public class MainUI extends UI {
 		getPage().setTitle("Smart Reservation System");
 		this.navigator = new Navigator(this, this);
 		this.navigator.addView(RoomListView.VIEWNAME, new RoomListView(navigator, roomController));
-		this.navigator.addView(ReservationView.VIEWNAME, new ReservationView(navigator, roomController));
+		this.navigator.addView(ReservationView.VIEWNAME,
+				new ReservationView(navigator, roomController, reservationController));
 
 		//
 		this.navigator.navigateTo(ReservationView.VIEWNAME);

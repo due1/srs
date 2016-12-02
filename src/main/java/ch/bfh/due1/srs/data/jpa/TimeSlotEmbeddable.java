@@ -44,7 +44,7 @@ public class TimeSlotEmbeddable implements TimeSlot {
 	 */
 	public TimeSlotEmbeddable(LocalDateTime start, LocalDateTime finish) {
 		if (start.isAfter(finish)) {
-			throw new IllegalArgumentException("Finis time of time slot cannot be smaler than start time");
+			throw new IllegalArgumentException("Finish time of time slot cannot be smaler than start time");
 		}
 		this.start = start;
 		this.finish = finish;
