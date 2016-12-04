@@ -8,6 +8,7 @@
 package ch.bfh.due1.srs.service;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -120,6 +121,10 @@ public class ReservationControllerTest {
 		}
 	}
 
+	/**
+	 * Ensures that the same room cannot be booked twice for the very same time
+	 * slot.
+	 */
 	@Test()
 	public void testBookRoom2() {
 		DataAccess dataAccess = DataAccess.getInstance();
@@ -133,6 +138,7 @@ public class ReservationControllerTest {
 		assertNotNull(res1);
 		Person aSecondPerson = dataAccess.makePerson("Lehner, Urs", "lnu1@nodomain.org");
 		Reservation res2 = this.reservationController.makeReservation(aSecondPerson, aRoom, timeslot1);
-		assertNotNull(res2);
+		// Assume no booking could be made.
+		assertNull(res2);
 	}
 }

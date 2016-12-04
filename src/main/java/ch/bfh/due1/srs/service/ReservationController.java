@@ -92,8 +92,14 @@ public class ReservationController {
 	}
 
 	private boolean available(Room room, TimeSlot timeSlot) {
-		// TODO Implement...
-		List<Reservation> reservationsByPeriod = new ArrayList<>();
-		return reservationsByPeriod.size() == 0;
+		List<Reservation> reservations = room.getReservations();
+		boolean available = true;
+		for (Reservation res : reservations) {
+			if (res.getTimeSlot().overlaps(timeSlot)) {
+				available = false;
+				break;
+			}
+		}
+		return available;
 	}
 }
