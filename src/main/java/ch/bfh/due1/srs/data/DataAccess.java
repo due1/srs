@@ -9,7 +9,8 @@ package ch.bfh.due1.srs.data;
 
 import java.util.List;
 
-import ch.bfh.ti.daterange.DateRange;
+import ch.bfh.due1.time.TimeSlot;
+import ch.bfh.due1.time.TimeSlotFactory;
 
 public abstract class DataAccess { // acts as a singleton
 	// A more versatile approach could be introduced here:
@@ -52,5 +53,13 @@ public abstract class DataAccess { // acts as a singleton
 
 	// Methods for reservations
 	///////////////////////////
-	public abstract Reservation makeReservation(Person person, Room room, DateRange dateRange);
+	public abstract Reservation makeReservation(Person person, Room room, TimeSlot timeSlot);
+
+	public abstract List<Reservation> findAllReservationsByRoom(Room room);
+
+	public abstract List<Reservation> findAllReservations();
+
+	// Utilities
+	////////////
+	public abstract TimeSlotFactory getTimeSlotFactory();
 }

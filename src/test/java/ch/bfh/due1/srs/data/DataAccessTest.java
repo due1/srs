@@ -12,16 +12,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.bfh.ti.daterange.DateRange;
-import ch.bfh.ti.daterange.DateRangeFactory;
+import ch.bfh.due1.time.TimeSlot;
+import ch.bfh.due1.time.TimeSlotFactory;
 
 public class DataAccessTest {
 	private DataAccess dataAccess;
@@ -81,15 +79,13 @@ public class DataAccessTest {
 	}
 
 	@Test
-	public void makeReservation() {
+	public void testMakeReservation() {
 		Person aPerson = this.dataAccess.makePerson("Dubuis, Eric", "due1@nodomain.org");
 		Room aRoom = this.dataAccess.makeRoom("N215", 12);
-		DateRangeFactory dateRangeFactory = new ch.bfh.ti.daterange.impl.pojo.DateRangeFactory();
-		LocalDateTime ltBegin = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
-		Date startTime = Date.from(ltBegin.atZone(ZoneId.systemDefault()).toInstant());
-		LocalDateTime ltEnd = ltBegin.plusHours(1);
-		Date endTime = Date.from(ltEnd.atZone(ZoneId.systemDefault()).toInstant());
-		DateRange timeslot = dateRangeFactory.createDateRange(startTime, endTime);
+		LocalDateTime startTime = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
+		LocalDateTime endTime = startTime.plusHours(1);
+		TimeSlotFactory tsf = this.dataAccess.getTimeSlotFactory();
+		TimeSlot timeslot = tsf.createTimeSlot(startTime, endTime);
 		this.dataAccess.makeReservation(aPerson, aRoom, timeslot);
 		// Test if due1's reservation list has been updated
 		List<Reservation> res1 = aPerson.getReservations();
@@ -97,5 +93,26 @@ public class DataAccessTest {
 		// Test if n215's reservation list has been updated
 		List<Reservation> res2 = aRoom.getReservations();
 		assertNotNull(res2);
+	}
+
+	@Test
+	public void testFindAllReservationsByRoom() {
+		Person aPerson = this.dataAccess.makePerson("Dubuis, Eric", "due1@nodomain.org");
+		Room aRoom = this.dataAccess.makeRoom("N215", 12);
+		LocalDateTime startTime1 = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
+		LocalDateTime endTime1 = startTime1.plusHours(1);
+		TimeSlotFactory tsf = this.dataAccess.getTimeSlotFactory();
+		TimeSlot timeslot1 = tsf.createTimeSlot(startTime1, endTime1);
+		this.dataAccess.makeReservation(aPerson, aRoom, timeslot1);
+		LocalDateTime startTime2 = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).plusHours(2);
+		LocalDateTime endTime2 = startTime2.plusHours(1);
+		TimeSlot timeslot2 = tsf.createTimeSlot(startTime2, endTime2);
+		this.dataAccess.makeReservation(aPerson, aRoom, timeslot2);
+		List<Reservation> reservations = this.dataAccess.findAllReservationsByRoom(aRoom);
+		assertNotNull(reservations);
+		assertTrue(reservations.size() == 2);
+		for (Reservation r : reservations) {
+			assertTrue(r.getTimeSlot().exactlyMatches(timeslot1) || r.getTimeSlot().exactlyMatches(timeslot2));
+		}
 	}
 }

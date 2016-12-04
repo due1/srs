@@ -7,6 +7,7 @@
  */
 package ch.bfh.due1.srs.data.jpa;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ import javax.persistence.ManyToOne;
 import ch.bfh.due1.srs.data.Person;
 import ch.bfh.due1.srs.data.Reservation;
 import ch.bfh.due1.srs.data.Room;
-import ch.bfh.ti.daterange.DateRange;
+import ch.bfh.due1.time.TimeSlot;
 
 @Entity(name = "Reservation")
 public class ReservationEntity implements Reservation {
@@ -30,22 +31,23 @@ public class ReservationEntity implements Reservation {
 	@ManyToOne(targetEntity = RoomEntity.class)
 	private Room room;
 
-	private DateRange dateRange;
+	@Embedded
+	private TimeSlotEmbeddable timeSlot;
 
 	public ReservationEntity() {
 	}
 
-	public ReservationEntity(Person owner, Room room, DateRange dateRange) {
+	public ReservationEntity(Person owner, Room room, TimeSlot timeSlot) {
 		this.owner = owner;
 		this.room = room;
-		this.dateRange = dateRange;
+		this.timeSlot = (TimeSlotEmbeddable) timeSlot;
 	}
 
-	// public ReservationEntity(Person owner, Room room, DateRange dateRange,
+	// public ReservationEntity(Person owner, Room room, DateRange timeSlot,
 	// List<Person> involved) {
 	// this.owner = owner;
 	// this.room = room;
-	// this.dateRange = dateRange;
+	// this.dateRange = timeSlot;
 	// this.involved = involved;
 	// }
 
@@ -60,13 +62,13 @@ public class ReservationEntity implements Reservation {
 	// }
 
 	@Override
-	public DateRange getDateRange() {
-		return this.dateRange;
+	public TimeSlot getTimeSlot() {
+		return this.timeSlot;
 	}
 
 	@Override
 	public String toString() {
-		return "ReservationEntity [id=" + this.id + ", owner=" + this.owner + ", room=" + this.room + ", dateRange="
-				+ this.dateRange + "]";
+		return "ReservationEntity [id=" + this.id + ", owner=" + this.owner + ", room=" + this.room + ", timeSlot="
+				+ this.timeSlot + "]";
 	}
 }

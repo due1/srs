@@ -8,15 +8,14 @@
 package ch.bfh.due1.srs.service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 import ch.bfh.due1.srs.data.DataAccess;
 import ch.bfh.due1.srs.data.Person;
 import ch.bfh.due1.srs.data.Room;
-import ch.bfh.ti.daterange.DateRange;
-import ch.bfh.ti.daterange.DateRangeFactory;
+import ch.bfh.due1.srs.data.jpa.JPATimeSlotFactory;
+import ch.bfh.due1.time.TimeSlot;
+import ch.bfh.due1.time.TimeSlotFactory;
 
 public class DataGenerator {
 
@@ -28,16 +27,16 @@ public class DataGenerator {
 		dataAccess.makePerson("Meyer, Franz", "myf1@nodomain.org");
 		dataAccess.makePerson("", "");
 		// make a few rooms
-		Room n215 = dataAccess.makeRoom("N215", 12);
-		dataAccess.makeRoom("N515", 10);
-		dataAccess.makeRoom("N615", 20);
+		Room n215 = dataAccess.makeRoom("N215", 10);
+		dataAccess.makeRoom("N311", 18);
+		dataAccess.makeRoom("N319", 18);
+		dataAccess.makeRoom("N321", 30);
+		dataAccess.makeRoom("N521", 28);
 		// make a few reservations
-		DateRangeFactory dateRangeFactory = new ch.bfh.ti.daterange.impl.pojo.DateRangeFactory();
-		LocalDateTime ltBegin = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
-		Date startTime = Date.from(ltBegin.atZone(ZoneId.systemDefault()).toInstant());
-		LocalDateTime ltEnd = ltBegin.plusHours(1);
-		Date endTime = Date.from(ltEnd.atZone(ZoneId.systemDefault()).toInstant());
-		DateRange timeslot = dateRangeFactory.createDateRange(startTime, endTime);
+		TimeSlotFactory tsf = new JPATimeSlotFactory();
+		LocalDateTime startTime = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
+		LocalDateTime endTime = startTime.plusHours(1);
+		TimeSlot timeslot = tsf.createTimeSlot(startTime, endTime);
 		dataAccess.makeReservation(due1, n215, timeslot);
 	}
 }
