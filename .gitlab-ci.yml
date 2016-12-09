@@ -87,3 +87,4 @@ pages:
     - public
   only:
     - master
+    - sprint4
