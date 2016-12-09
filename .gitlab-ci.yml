@@ -67,6 +67,8 @@ deploy:jdk8:
     - 'mvn $MAVEN_CLI_OPTS package site site:stage'
   only:
     - master
+    - sprint4
+
   # Archive up the built documentation site.
   artifacts:
     paths:
