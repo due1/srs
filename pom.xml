@@ -51,6 +51,15 @@
 		<!-- add other developers, too -->
 	</developers>
 
+	<distributionManagement>
+		<site>
+			<id>srs.local</id>
+			<name>Smart Reservation System</name>
+			<!-- Normally, you would use a full-fledged HTTP(S) URL here... -->
+			<url>target/staging</url>
+		</site>
+	</distributionManagement>
+
 	<repositories>
 		<repository>
 			<id>vaadin-addons</id>
@@ -139,7 +148,7 @@
 		<dependency>
 			<groupId>ch.bfh.due1</groupId>
 			<artifactId>time-slot</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 	</dependencies>
 
