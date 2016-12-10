@@ -54,7 +54,7 @@ If Vaadin pre-releases are not enabled by default, use the Maven parameter
 Tagging
 -------------------------
 
-We use the following tags to track major milestones:
+For the purpose of this (simulated!) project, we use the following tags to track major milestones:
 
 del1:	deliverable 1
 
