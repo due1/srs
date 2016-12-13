@@ -38,4 +38,97 @@ corresponding dependencies must be made available in the project POM. See
 can use the underlying database in the way desired. File <<<persistence.xml>>>
 must be included in the corresponding application JAR or WAR file. See
 <<<src/main/resources/META-INF>>> for a series of sample configurations
-for typical database acces types.
+for typical database access types.
+
+
+Derby Server
+
+	To use Derby, download it from here: http://db.apache.org/derby/derby_downloads.html.
+
+	Install it according to the instruction given here: http://db.apache.org/derby/docs/10.12/getstart/index.html
+
+	I assume that you have the directory containing the Derby commands in your <<<$PATH>>>
+environment variable. Then:
+
+* Starting the Server
+
+	Open a terminal window and start the Server:
+
++----+
+$ startNetworkServer
+Tue Dec 12 16:57:45 CET 2016 : Apache Derby Network Server - 10.8.1.2 - (1095077) started and ready to accept connections on port 1527
++----+
+
+	To stop the server, type <<<CTRL-C>>>.
+
+	You may encounter a security issue as illustrated here:
+
++----+
+$ startNetworkServer
+Tue Dec 12 16:59:37 CET 2016 : Security manager installed using the Basic server security policy.
+Tue Dec 12 16:59:38 CET 2016 : access denied ("java.net.SocketPermission" "localhost:1527" "listen,resolve")
+java.security.AccessControlException: access denied ("java.net.SocketPermission" "localhost:1527" "listen,resolve")
+	at java.security.AccessControlContext.checkPermission(AccessControlContext.java:472)
+	at java.security.AccessController.checkPermission(AccessController.java:884)
+	...
++----+
+
+	The simplest way to circumvent this is to start the server without a Java
+security manager. (Note however that this is acceptable when working in the
+development mode only.)
+
++----+
+$ startNetworkServer -noSecurityManager
+Tue Dec 12 17:03:45 CET 2016 : Apache Derby Network Server - 10.8.1.2 - (1095077) started and ready to accept connections on port 1527
++----+
+
+
+* Accessing the Database from the Command Line
+
+	Provided that the server is running then you can access the database in various
+ways, for example, via the interactive command line utility <<<ij>>>:
+
++----+
+$ ij
+ij version 10.8
+ij>
++----+
+
+	Connect the utility to the server:
+
++----+
+ij> connect 'jdbc:derby://localhost:1527/test';
++----+
+
+	You can list the tables of the database <<<test>>>:
+
++----+
+ij> show tables;
+TABLE_SCHEM         |TABLE_NAME                    |REMARKS             
+------------------------------------------------------------------------
+SYS                 |SYSALIASES                    |                    
+SYS                 |SYSCHECKS                     |                    
+SYS                 |SYSCOLPERMS                   |                    
+...                 ...                            ...
+SYSIBM              |SYSDUMMY1                     |                    
+DERBY               |PERSON                        |                    
+DERBY               |PERSON_RESERVATION            |                    
+DERBY               |RESERVATION                   |                    
+DERBY               |ROOM                          |                    
+DERBY               |ROOM_RESERVATION              |                    
+DERBY               |SEQUENCE                      |                    
+ij>
++----+
+
+	To select the content of a table, type:
+
++----+
+ij> select * from DERBY.ROOM;
+ID                  |CAPACITY   |NAME                                                                                                                            
+----------------------------------------------
+5                   |12         |N215         
+13                  |30         |N2421        
+...
++----+
+
+	Consult the Derby manual for various other features.
