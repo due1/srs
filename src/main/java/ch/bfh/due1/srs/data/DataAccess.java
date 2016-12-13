@@ -29,6 +29,7 @@ public abstract class DataAccess { // acts as a singleton
 				instance = (DataAccess) clazz.newInstance();
 			} catch (Exception ex) {
 				System.err.println("Could not load class: " + DEFAULT_DATA_ACCESS_CLASS);
+				ex.printStackTrace();
 				throw new RuntimeException("Could not load class: " + DEFAULT_DATA_ACCESS_CLASS);
 			}
 		}

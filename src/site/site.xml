@@ -53,13 +53,9 @@
         <menu name="Resources">
             <item name="The APT Format" href="format.html"/>
             <item name="The FAQ Format" href="faq.html"/>
+            <item name="DB Access" href="db_memo.html"/>
         </menu>
         <menu ref="reports"/>
-        <!--
-        <menu name="Additional Reports">
-            <item name="Test Coverage" href="jacoco/index.html"/>
-        </menu>
-		-->
     </body>
 
     <skin>

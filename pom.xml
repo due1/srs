@@ -117,16 +117,28 @@
 			<artifactId>javax.persistence</artifactId>
 			<version>2.0.0</version>
 		</dependency>
+		<!-- Use only needed dependencies: -->
+		<!-- (To simplify life, you can keep all during development time, however.) -->
+		<!-- H2 in-memory or embedded database. -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.3.160</version>
 		</dependency>
+		<!-- Derby in-memory or embedded database. -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.13.1.1</version>
 		</dependency>
+		<!-- Client part of Derby client-server database. -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>10.12.1.1</version>
+			<type>jar</type>
+		</dependency>
+		<!-- End of database dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -255,7 +267,6 @@
 					</filesets>
 				</configuration>
 			</plugin>
-
 			<!-- The Jetty plugin allows us to easily test the development build by 
 				running jetty:run on the command line. -->
 			<plugin>
@@ -266,6 +277,34 @@
 					<scanIntervalSeconds>2</scanIntervalSeconds>
 				</configuration>
 			</plugin>
+			<!-- The Derby plugin allows us to easily start and stop the Derby database 
+				on the command line: mvn derby:run (runs until CTRL-C is pressed) -->
+			<!-- https://github.com/carlspring/derby-maven-plugin/blob/master/USAGE -->
+	<plugin>
+		<groupId>org.carlspring.maven</groupId>
+		<artifactId>derby-maven-plugin</artifactId>
+		<version>1.10</version>
+		<configuration>
+			<basedir>${project.build.directory}/derby</basedir>
+			<port>1527</port>
+		</configuration>
+		<executions>
+			<execution>
+				<id>start-derby</id>
+				<phase>pre-integration-test</phase>
+				<goals>
+					<goal>start</goal>
+				</goals>
+			</execution>
+			<execution>
+				<id>stop-derby</id>
+				<phase>post-integration-test</phase>
+				<goals>
+					<goal>stop</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin>
 		</plugins>
 	</build>
 

@@ -8,7 +8,7 @@
 	<!-- https://gist.github.com/mortezaadi/8619433 -->
 	<!-- Ensure that you include the matching dependency into your pom.xml -->
 
-	<!-- H2, in-memory mode, i.e., application accesses driver directly, data volatile in memory. -->
+	<!-- H2, embedded mode, i.e., application accesses driver directly, path specification required. -->
 	<persistence-unit name="srs-pu">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
@@ -16,7 +16,7 @@
 			<property name="eclipselink.jdbc.platform"
 				value="org.eclipse.persistence.platform.database.H2Platform" />
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:./target/srsh2db" />
 			<property name="eclipselink.logging.level" value="FINE" />
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode"
