@@ -8,19 +8,16 @@
 	<!-- https://gist.github.com/mortezaadi/8619433 -->
 	<!-- Ensure that you include the matching dependency into your pom.xml -->
 
-	<!-- H2, in-memory mode, i.e., application accesses driver directly, data volatile in memory. -->
-	<persistence-unit name="srs-pu">
+	<!-- Derby, in-memory mode, i.e., application accesses driver directly, data volatile in memory. -->
+	<persistence-unit name="srs-pu"
+		transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
-			<property name="eclipselink.jdbc.platform"
-				value="org.eclipse.persistence.platform.database.H2Platform" />
-			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />
-			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory;create=true" />
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
-			<property name="eclipselink.ddl-generation.output-mode"
-				value="database" />
+			<property name="eclipselink.ddl-generation.output-mode" value="database" />
 		</properties>
 	</persistence-unit>
 
