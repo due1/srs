@@ -117,28 +117,12 @@
 			<artifactId>javax.persistence</artifactId>
 			<version>2.0.0</version>
 		</dependency>
-		<!-- Use only needed dependencies: -->
-		<!-- (To simplify life, you can keep all during development time, however.) -->
-		<!-- H2 in-memory or embedded database. -->
+		<!-- Default database: H2 in-memory or embedded database. -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.3.160</version>
 		</dependency>
-		<!-- Derby in-memory or embedded database. -->
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>10.13.1.1</version>
-		</dependency>
-		<!-- Client part of Derby client-server database. -->
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.12.1.1</version>
-			<type>jar</type>
-		</dependency>
-		<!-- End of database dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -277,34 +261,6 @@
 					<scanIntervalSeconds>2</scanIntervalSeconds>
 				</configuration>
 			</plugin>
-			<!-- The Derby plugin allows us to easily start and stop the Derby database 
-				on the command line: mvn derby:run (runs until CTRL-C is pressed) -->
-			<!-- https://github.com/carlspring/derby-maven-plugin/blob/master/USAGE -->
-	<plugin>
-		<groupId>org.carlspring.maven</groupId>
-		<artifactId>derby-maven-plugin</artifactId>
-		<version>1.10</version>
-		<configuration>
-			<basedir>${project.build.directory}/derby</basedir>
-			<port>1527</port>
-		</configuration>
-		<executions>
-			<execution>
-				<id>start-derby</id>
-				<phase>pre-integration-test</phase>
-				<goals>
-					<goal>start</goal>
-				</goals>
-			</execution>
-			<execution>
-				<id>stop-derby</id>
-				<phase>post-integration-test</phase>
-				<goals>
-					<goal>stop</goal>
-				</goals>
-			</execution>
-		</executions>
-	</plugin>
 		</plugins>
 	</build>
 
@@ -426,6 +382,97 @@
 					</snapshots>
 				</pluginRepository>
 			</pluginRepositories>
+		</profile>
+		<profile>
+			<!-- H2 in-memory database (default). -->
+			<id>h2-in-memory</id>
+		</profile>
+		<profile>
+			<!-- H2 embedded database. -->
+			<id>h2-embedded</id>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/config/h2-embedded</directory>
+						<includes>
+							<include>*</include>
+						</includes>
+						<targetPath>META-INF</targetPath>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<!-- Derby in-memory database. -->
+			<id>derby-in-memory</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.derby</groupId>
+					<artifactId>derby</artifactId>
+					<version>10.13.1.1</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/config/derby-in-memory</directory>
+						<includes>
+							<include>*</include>
+						</includes>
+						<targetPath>META-INF</targetPath>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<!-- Derby embedded database. -->
+			<id>derby-embedded</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.derby</groupId>
+					<artifactId>derby</artifactId>
+					<version>10.13.1.1</version>
+				</dependency>
+			</dependencies>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/config/derby-embedded</directory>
+						<includes>
+							<include>*</include>
+						</includes>
+						<targetPath>META-INF</targetPath>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<!-- Derby server database. Ensure that the DB server is up and running. -->
+			<id>derby-client-server</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.derby</groupId>
+					<artifactId>derby</artifactId>
+					<version>10.13.1.1</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.derby</groupId>
+					<artifactId>derbyclient</artifactId>
+					<version>10.12.1.1</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/config/derby-client-server</directory>
+						<includes>
+							<include>*</include>
+						</includes>
+						<targetPath>META-INF</targetPath>
+					</resource>
+				</resources>
+			</build>
 		</profile>
 	</profiles>
 
