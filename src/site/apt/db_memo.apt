@@ -132,3 +132,51 @@ ID                  |CAPACITY   |NAME
 +----+
 
 	Consult the Derby manual for various other features.
+
+
+Profiles in the POM
+
+	There are several profiles in file <<<pom.xml>>> which allow to run the test
+using various databases and acces styles. Upon a build process, the corresponding
+file <<<persistence.xml>>> is copied to the appropriate place enabling the
+specific database as well as the corresponding access style. The necessary
+driver software is specified in the profiles, too, as a dependency.
+
+	The following table lists the profile names, database name, access style, and
+place of the corresponding <<<persistence.xml>>> file:
+
+*-----------------------*---------------*-------------------*---------------------------------------*
+| Profile ID			| Database		| Access style		| Directory with JPA configuration		|
+*-----------------------*---------------*-------------------*---------------------------------------*
+| (default)				| H2			| in-memory			| src/main/resources/META-INF			|
+*-----------------------*---------------*-------------------*---------------------------------------*
+| h2-in-memory			| H2			| in-memory			| src/main/resources/META-INF			|
+*-----------------------*---------------*-------------------*---------------------------------------*
+| h2-embedded			| H2			| embedded			| src/main/config/h2-embedded			|
+*-----------------------*---------------*-------------------*---------------------------------------*
+| derby-in-memory		| Derby			| in-memory			| src/main/config/derby-in-memory		|
+*-----------------------*---------------*-------------------*---------------------------------------*
+| derby-embedded		| Derby			| embedded			| src/main/config/derby-embedded		|
+*-----------------------*---------------*-------------------*---------------------------------------*
+| derby-client-server	| Derby			| client/server		| src/main/config/derby-client-server	|
+*-----------------------*---------------*-------------------*---------------------------------------*
+
+
+Database Access and Logging
+
+	{{{http://www.eclipse.org/eclipselink/}EclipseLink}} is used as O/R mapper. The following
+EclipseLink properties manage the database access and logging level (snippet from the Derby
+client/server JPA configuration file):
+
++------+
+<property name="javax.persistence.jdbc.user" value="derby" />
+<property name="javax.persistence.jdbc.password" value="*****" />
+<property name="eclipselink.logging.level" value="FINE" />
+<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+<property name="eclipselink.ddl-generation.output-mode" value="database" />
++------+
+
+	Logging level <<<FINE>>> is specified by default. Use level <<<SEVERE>>> to log
+severe problems only. See
+{{{http://www.eclipse.org/eclipselink/documentation/2.5/jpa/extensions/p_logging_level.htm}EclipseLink, Table 5-55}}
+for various other useful logging levels.
