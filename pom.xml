@@ -30,12 +30,29 @@
 		<vaadin.widgetset.mode>local</vaadin.widgetset.mode>
 	</properties>
 
+	<licenses>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE, Version 3</name>
+			<url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
 	<scm>
 		<connection>scm:git:git@github.com:due1/srs.git</connection>
 		<developerConnection>scm:git:git@github.com:due1/srs.git</developerConnection>
 		<url>https://github.com/due1/srs.git</url>
 		<tag>HEAD</tag>
 	</scm>
+
+	<distributionManagement>
+		<site>
+			<id>srs.local</id>
+			<name>Smart Reservation System</name>
+			<!-- Normally, you would use a full-fledged HTTP(S) URL here... -->
+			<url>target/staging</url>
+		</site>
+	</distributionManagement>
 
 	<developers>
 		<developer>
@@ -50,15 +67,6 @@
 		</developer>
 		<!-- add other developers, too -->
 	</developers>
-
-	<distributionManagement>
-		<site>
-			<id>srs.local</id>
-			<name>Smart Reservation System</name>
-			<!-- Normally, you would use a full-fledged HTTP(S) URL here... -->
-			<url>target/staging</url>
-		</site>
-	</distributionManagement>
 
 	<repositories>
 		<repository>
